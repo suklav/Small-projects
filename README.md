@@ -5,6 +5,6 @@ I prefer writing programs mainly in Python, C++, C, Haskell, and Java.
 
 Here is the list of programs available in this repository: 
 1. [Email slicer using python ](Email-Slicer-using-python/)
-
+2. [IC-TAC-TOE](TIC-TAC-TOE)
 
 If you have an exciting idea, reach out to me here - smcssg2624@iacs.res.in
