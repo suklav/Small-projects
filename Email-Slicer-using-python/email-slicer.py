@@ -14,7 +14,7 @@ def append_lists(email):
 
 if __name__ == '__main__':
     # Delcare variables
-    email_list = ['suklav.cs@gmail.com', 2, 3.14, 'smcssg2624@iacs.res.in', 'pq1','suklav.cs [at] gmail [DOT] com', True]
+    email_list = ['debapriyo-[AT]-isical-[DOT]-ac-[DOT]-in', 2, 3.14, 'smcssg2624@iacs.res.in', 'pq1','suklav.cs [at] gmail [DOT] com', True]
     user_name = []
     domain_name = []
     
