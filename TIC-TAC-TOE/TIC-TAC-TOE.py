@@ -1,16 +1,3 @@
-#The algo:
-#
-
-# √ choose the players
-# √ create the board
-# √ choose an initial player
-# √ until someone wins, check for winner
-# √   show the board
-# √   choose location, mark it
-# √   toggle active player
-
-# √ game over, active player won!
-
 
 def main():
     print()
@@ -19,63 +6,67 @@ def main():
     print("(Row and column number starts with a zero)")
     print()
 
-    # CREATE THE BOARD:
-    # Board is a list of rows
-    # Rows are a list of cells
-    board = [
+
+    
+    matrix = [
         [None, None, None],
         [None, None, None],
         [None, None, None],
     ]
 
-    # CHOOSE INITIAL PLAYER
-    active_player_index = 0
-    players = ["Suklav", "Machine"]
+    # api variable is nothing but the index of current or active player.. LOL:)
+    api = 0
+    p1= input("Hello! \nEnter player1 name: ")
+    p2= input("Hello! \nEnter player2 name: ")
+    
+    players = [p1,p2]
+    
+    
     symbols = ["X", "O"]
-    player = players[active_player_index]
+    player = players[api]
 
     # UNTIL SOMEONE WINS
-    while not find_winner(board):
-        # SHOW THE BOARD
-        player = players[active_player_index]
-        symbol = symbols[active_player_index]
+    while not tictactoe(matrix):
+        # SHOW THE matrix
+        player = players[api]
+        symbol = symbols[api]
 
         announce_turn(player)
-        show_board(board)
-        if not choose_location(board, symbol):
+        show_matrix(matrix)
+        if not choose_location(matrix, symbol):
             print("That isn't an option, try again.")
             continue
 
         # TOGGLE ACTIVE PLAYER
-        active_player_index = (active_player_index + 1) % len(players)
+        api = (api + 1) % len(players)
 
     print()
-    print(f"GAME OVER! {player} has won with the board: ")
-    show_board(board)
+    print(f"GAME OVER! {player} has won with the matrix: ")
+    show_matrix(matrix)
     print()
 
 
-def choose_location(board, symbol):
+def choose_location(matrix, symbol):
     row = int(input("Choose which row: "))
     column = int(input("Choose which column: "))
 
     row -= 1
     column -= 1
-    if row < 0 or row >= len(board):
+    if row < 0 or row >= len(matrix):
         return False
-    if column < 0 or column >= len(board[0]):
+    if column < 0 or column >= len(matrix[0]):
         return False
 
-    cell = board[row][column]
+    cell = matrix[row][column]
     if cell is not None:
         return False
 
-    board[row][column] = symbol
+    matrix[row][column] = symbol
     return True
 
 
-def show_board(board):
-    for row in board:
+def show_matrix(matrix):
+    for row in matrix:
         print("| ", end='')
         for cell in row:
             symbol = cell if cell is not None else "_"
@@ -85,12 +76,12 @@ def show_board(board):
 
 def announce_turn(player):
     print()
-    print(f"It's {player}'s turn. Here's the board:")
+    print(f"It's {player}'s turn. Here's the matrix:")
     print()
 
 
-def find_winner(board):
-    sequences = get_winning_sequences(board)
+def tictactoe(matrix):
+    sequences = get_winning_sequences(matrix)
 
     for cells in sequences:
         symbol1 = cells[0]
@@ -100,26 +91,26 @@ def find_winner(board):
     return False
 
 
-def get_winning_sequences(board):
+def get_winning_sequences(matrix):
     sequences = []
 
     # Win by rows
-    rows = board
+    rows = matrix
     sequences.extend(rows)
 
     # Win by columns
     for col_idx in range(0, 3):
         col = [
-            board[0][col_idx],
-            board[1][col_idx],
-            board[2][col_idx],
+            matrix[0][col_idx],
+            matrix[1][col_idx],
+            matrix[2][col_idx],
         ]
         sequences.append(col)
 
     # Win by diagonals
     diagonals = [
-        [board[0][0], board[1][1], board[2][2]],
-        [board[0][2], board[1][1], board[2][0]],
+        [matrix[0][0], matrix[1][1], matrix[2][2]],
+        [matrix[0][2], matrix[1][1], matrix[2][0]],
     ]
     sequences.extend(diagonals)
 
